@@ -177,7 +177,6 @@ public class PotionMakingSkript : MonoBehaviour
             if (newIngredient.canBeAffectedByTemperature == true)
             {
                 Temperature temp = RandomTemperature();
-                Debug.Log(newIngredient.name + " can be affected by temp so it's temperature is " + temp);
                 potionRecipe.temperatureOfIngredients.Add(temp);
             }
             else
@@ -272,8 +271,6 @@ public class PotionMakingSkript : MonoBehaviour
     private Temperature RandomTemperature()
     {
         int index = Random.Range(0, 3);
-        Debug.Log("TEMP index is " + index);
-        Debug.Log("Temp should be" + (Temperature.NORMAL + index));
         switch (index)
         {
             case 0: return Temperature.NORMAL;

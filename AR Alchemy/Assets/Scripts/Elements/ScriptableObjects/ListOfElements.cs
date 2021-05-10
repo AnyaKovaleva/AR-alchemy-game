@@ -19,12 +19,6 @@ public class ListOfElements : ScriptableObject
             }
 
         }
-        Debug.Log("Elements count = " + allElements.Count);
-        Debug.Log("Unique elements count = " + uniqeElements.Count);
-        foreach (ElementObject elem in allElements)
-        {
-            Debug.Log(elem.name);
-        }
         if (uniqeElements.Count == allElements.Count)
         {
             return true;
