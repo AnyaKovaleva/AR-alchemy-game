@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e47c686a0ef1ff46ab2046573972ff1, type: 3}
+  m_Name: HeatCrystal
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1561288522058519416, guid: 933a6ecd09de0614e945b647643990fd, type: 3}
+  price: 15
+  canBeAffectedByTemperature: 0
+  crystalTemperatureEffect: 1

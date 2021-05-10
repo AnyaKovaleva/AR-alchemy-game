@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139143ee98d053345bff7902dfddd35b, type: 3}
+  m_Name: VampireAshes
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3138398600349415590, guid: 4ea93d88df43d9145bda3e1153e0de3e, type: 3}
+  price: 20
+  canBeAffectedByTemperature: 1
