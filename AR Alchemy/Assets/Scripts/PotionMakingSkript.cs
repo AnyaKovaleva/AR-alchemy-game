@@ -21,6 +21,8 @@ public class PotionMakingSkript : MonoBehaviour
     public int maxNumberOfIngredients;
     //text in top left corner of screen where number of earned coins is displayed
     public TMP_Text coinCountText;
+    //countdown timer. Required to add extra playtime when potion is crafted successfully 
+    public TimerScript timer;
 
     //recipe to make potion
     private RecipeObject potionRecipe;
@@ -320,8 +322,13 @@ public class PotionMakingSkript : MonoBehaviour
             return;
         }
 
-
+        Debug.Log("Mixed in " + newIngredient.GetElement().name + "  temp " + newIngredient.GetTemperature());
+        if (currentlyMixedIngredients[slotIndex] != null)
+        {
+            return;
+        }
         currentlyMixedIngredients[slotIndex] = newIngredient;
+        Debug.Log("list elem temp " + currentlyMixedIngredients[slotIndex].GetTemperature());
         //check if after adding new ingredient currentlyMixedIngredients follow the recipe
         CheckIfFollowsRecipe(slotIndex);
 
@@ -331,6 +338,8 @@ public class PotionMakingSkript : MonoBehaviour
             DeactivateAllIngredientSlots();
             return;
         }
+
+        ingredientSlots[slotIndex].GetComponentInChildren<TMP_Text>().color = Color.green;
 
         if (slotIndex == numOfIngredientsInPotion - 1)  //if we mixed all required ingredients 
         {
@@ -345,7 +354,7 @@ public class PotionMakingSkript : MonoBehaviour
             //displaying coin count
             coinCountText.text = coinCount.ToString();
             DeactivateAllIngredientSlots();
-
+            AddExtraPlaytime();
         }
 
     }
@@ -357,6 +366,7 @@ public class PotionMakingSkript : MonoBehaviour
         {
             if (currentlyMixedIngredients[i] == null)
             {
+                Debug.Log("ingredient slot is null " + i);
                 if (i < lastAddedElementIndex)
                 {
                     //card placed in wrong order. Previous card slot is empty. 
@@ -366,17 +376,21 @@ public class PotionMakingSkript : MonoBehaviour
                 continue;
             }
 
+            Debug.Log("index = " + i + " recipe elem = " + potionRecipe.ingredients[i] + "  current mixed = " + currentlyMixedIngredients[i].GetElement());
+
             if (currentlyMixedIngredients[i].GetElement() == potionRecipe.ingredients[i])
             {
                 if (currentlyMixedIngredients[i].GetTemperature() != potionRecipe.temperatureOfIngredients[i])
                 {
                     //element has incorrect temperature
+                    Debug.Log("Temp = " + potionRecipe.temperatureOfIngredients[i] + "   but it SHOULD be " + currentlyMixedIngredients[i].GetTemperature());
                     isSpoiled = true;
                     return;
                 }
             }
             else
             {
+                Debug.Log("element should be " + currentlyMixedIngredients[i].GetElement().name);
                 //element does not match recipe
                 isSpoiled = true;
                 return;
@@ -433,7 +447,44 @@ public class PotionMakingSkript : MonoBehaviour
             potionStatePrefabs[0]?.SetActive(false);
             potionStatePrefabs[1]?.SetActive(false);
             potionStatePrefabs[2]?.SetActive(true);
-            potionStateText.text = "PotionIsSpoiled";
+            potionStateText.text = "Potion is spoiled";
         }
     }
+
+    //adds extra playtime based on number of ingredients in potion. Called when potion is successfully crafted
+    private void AddExtraPlaytime()
+    {
+        if(timer == null)
+        {
+            return;
+        }
+
+        switch (numOfIngredientsInPotion)
+        {
+            case 2: timer.AddTime(40);
+                Debug.Log("added extra 40 seconds");
+                break;
+            case 3: timer.AddTime(50);
+                Debug.Log("added extra 50 seconds");
+
+                break;
+            case 4: timer.AddTime(60);
+                Debug.Log("added extra 60 seconds");
+
+                break;
+            case 5: timer.AddTime(70);
+                break;
+            case 6: timer.AddTime(90);
+                break;
+        }
+
+        if(numOfCompoundIngredientsInPotion != 0)
+        {
+            timer.AddTime(20 * numOfCompoundIngredientsInPotion);
+            Debug.Log("added extra " + (2 * numOfCompoundIngredientsInPotion )+" seconds");
+
+        }
+
+    }
+
 }

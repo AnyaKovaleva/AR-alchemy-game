@@ -105,4 +105,13 @@ public class TimerScript : MonoBehaviour
         timerText.color = Color.white;
     }
 
+    public void AddTime(int seconds)
+    {
+        if(seconds < 0)
+        {
+            return;
+        }
+        timeLeft += seconds;
+    }
+
 }

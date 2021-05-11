@@ -33,7 +33,7 @@ public class CrystalCard : Card
     {
         if (card.GetCanBeAffectedByTemperature())
         {
-
+            Debug.Log("TEEEMP CHANGEEEEE");
             if (crystal.GetCrystalTemperatureEffect() == TemperatureEffect.HEAT_UP)
             {
                 if (card.GetTemperature() == Temperature.COLD)
@@ -80,6 +80,7 @@ public class CrystalCard : Card
             canCheckIfObjectIsTooClose = true;
             //applies temperature effect 1 time
             ApplyTemperatureEffect(otherCard);
+            canCollide = false;
             if (otherCard.GetElement() != null && otherCard.GetElement().GetElementType() == ElementType.CRYSTAL)
             {
                 //check if combination of this crystal and card it collided with can make a compound element
@@ -92,10 +93,10 @@ public class CrystalCard : Card
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!canCollide)
-        {
-            return;
-        }
+        //if (!canCollide)
+        //{
+        //    return;
+        //}
         if (canCheckIfObjectIsTooClose)
         {
             Card otherCard = collision.gameObject.GetComponent<Card>(); //check if crystal is in collision with another card
@@ -104,7 +105,7 @@ public class CrystalCard : Card
                 //if crystal is brought too close to another card it applies it's temperature effect 2nd time
                 //For example when crystal with temperature effect HEAT_UP enters collision with COLD element element's temperature will be only changed to NORMAL.
                 //But when distance between crystal and element becomes less than 0.19 crystal will apply it's temperature effect for the second time and change element's temperature to HOT
-                if (Vector3.Distance(this.transform.position, collision.gameObject.transform.position) < 0.19)
+                if (Vector3.Distance(this.transform.position, collision.gameObject.transform.position) < 0.21)
                 {
                     canCheckIfObjectIsTooClose = false;
                     ApplyTemperatureEffect(otherCard);
@@ -114,5 +115,12 @@ public class CrystalCard : Card
             }
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        canCollide = true;
+    }
+
+
 
 }
