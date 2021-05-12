@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139143ee98d053345bff7902dfddd35b, type: 3}
   m_Name: Jimsonweed
   m_EditorClassIdentifier: 
+  displayName: "\u0414\u0443\u0440\u043C\u0430\u043D-\u0442\u0440\u0430\u0432\u0430"
   prefab: {fileID: 7488717773323366283, guid: 6387bf4c6cf99d242960a8a9ec9afc10, type: 3}
   price: 30
   canBeAffectedByTemperature: 1

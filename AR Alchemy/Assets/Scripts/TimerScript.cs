@@ -112,6 +112,7 @@ public class TimerScript : MonoBehaviour
             return;
         }
         timeLeft += seconds;
+        DisplayTime();
     }
 
 }

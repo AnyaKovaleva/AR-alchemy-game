@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139143ee98d053345bff7902dfddd35b, type: 3}
   m_Name: VampireAshes
   m_EditorClassIdentifier: 
+  displayName: "\u041F\u0440\u0430\u0445 \u0432\u0430\u043C\u043F\u0438\u0440\u0430"
   prefab: {fileID: 3138398600349415590, guid: 4ea93d88df43d9145bda3e1153e0de3e, type: 3}
-  price: 20
+  price: 30
   canBeAffectedByTemperature: 1

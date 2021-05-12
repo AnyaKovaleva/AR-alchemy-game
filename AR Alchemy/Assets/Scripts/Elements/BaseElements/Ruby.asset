@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: Ruby
   m_EditorClassIdentifier: 
+  displayName: "\u0420\u0443\u0431\u0438\u043D"
   prefab: {fileID: 8570510370710515898, guid: d4591b4924b4d7246ac266c14cb8fac2, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

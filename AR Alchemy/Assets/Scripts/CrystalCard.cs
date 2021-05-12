@@ -43,8 +43,11 @@ public class CrystalCard : Card
                 else
                 {
                     card.SetTemperature(Temperature.HOT);
+                    //in 40 seconds card will cool back down to normal temperature
+                    StartCoroutine(card.ReturnToNormalTemperature());
                 }
                 card.UpdateTemperatureVisual();
+                
                 return;
             }
 
@@ -57,7 +60,8 @@ public class CrystalCard : Card
                 else
                 {
                     card.SetTemperature(Temperature.COLD);
-
+                    //in 40 seconds card will heat back down to normal temperature
+                    StartCoroutine(card.ReturnToNormalTemperature());
                 }
                 card.UpdateTemperatureVisual();
 

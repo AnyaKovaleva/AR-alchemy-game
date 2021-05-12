@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: UnicornHorn
   m_EditorClassIdentifier: 
+  displayName: "\u0420\u043E\u0433 \u0435\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u0430"
   prefab: {fileID: 4314772628323220808, guid: 4ae1f455beaaf8744b6c8283a3790fe2, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

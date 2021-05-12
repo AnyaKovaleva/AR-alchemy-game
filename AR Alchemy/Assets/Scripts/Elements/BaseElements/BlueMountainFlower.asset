@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: BlueMountainFlower
   m_EditorClassIdentifier: 
+  displayName: "\u0413\u043E\u043B\u0443\u0431\u043E\u0439 \u0433\u043E\u0440\u043D\u043E\u0446\u0432\u0435\u0442"
   prefab: {fileID: 2279543783174240766, guid: 146ce8568fe016048b0d4a71c067ebba, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

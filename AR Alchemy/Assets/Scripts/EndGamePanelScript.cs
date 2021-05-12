@@ -21,7 +21,7 @@ public class EndGamePanelScript : MonoBehaviour
     public void ActivateEndGamePanel()
     {
         gameObject.SetActive(true);
-        outputCoinCount.text = "You earned " + coinCountText.text + " coins!";
+        outputCoinCount.text = "Тебе удалось заработать " + coinCountText.text + " монеток!";
     }
 
     //Hides endgame panel, resets timer and coinCount. Called when "Play again" button is pressed

@@ -71,7 +71,7 @@ public class ElementMixingScript : MonoBehaviour
             if (resultElement != null)
             {
                 //display result element  on screen
-                resultCompoundElementName.text = resultElement.name.ToString();
+                resultCompoundElementName.text = resultElement.displayName;
             }
             else
             {

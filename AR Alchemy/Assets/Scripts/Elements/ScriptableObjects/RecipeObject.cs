@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[CreateAssetMenu(menuName = "Alchemy/Recipe/Recipe")]
 public class RecipeObject : ScriptableObject
 {
     //element that should be created if recipe is followed
@@ -17,13 +17,13 @@ public class RecipeObject : ScriptableObject
     //max number of ingredients that recipe can hold in ingredientTemperatureDictionary
     protected int maxNumberOfIngredients;
     [TextArea]
-    public string Note = "Max number of ingredients in recipe is 10. Elements of temperatureOfIngredients list represent temperature of ingredients of same index of ingredients list.  If there are more ingredients passed they will be ignored. If temperature is not passed it will be set to NORMAL";
-    private void Awake()
+    public string Note = "Max number of ingredients in recipe is 6. Elements of temperatureOfIngredients list represent temperature of ingredients of same index of ingredients list.  If there are more ingredients passed they will be ignored. If temperature is not passed it will be set to NORMAL";
+
+    public RecipeObject()
     {
-        maxNumberOfIngredients = 10;
+        maxNumberOfIngredients = 6;
         ingredients = new List<ElementObject>();
         temperatureOfIngredients = new List<Temperature>();
-
     }
 
     public void SetMaxNumberOfIngredients(int newMaxNumber)
@@ -34,6 +34,21 @@ public class RecipeObject : ScriptableObject
     public virtual ElementObject GetResultElement()
     {
         return resultElement;
+    }
+
+    public virtual int GetNumberOfCompoundElementsInRecipe()
+    {
+        int numOfCompoundElements = 0;
+
+        foreach(ElementObject ingredient in ingredients)
+        {
+            if(ingredient != null && ingredient.GetElementType() == ElementType.COMPLEX_ELEMENT)
+            {
+                numOfCompoundElements++;
+            }
+        }
+
+        return numOfCompoundElements;
     }
 
     //ties ingredients with their temperatures. Required to find temperature of ingredient without knowing its index

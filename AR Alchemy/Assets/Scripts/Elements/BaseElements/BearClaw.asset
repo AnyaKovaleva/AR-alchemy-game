@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: BearClaw
   m_EditorClassIdentifier: 
+  displayName: "\u041A\u043E\u0433\u043E\u0442\u044C \u043C\u0435\u0434\u0432\u0435\u0434\u044F"
   prefab: {fileID: 2767902110834432849, guid: 3af0134c2c427f448a69f4a10a0161a9, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

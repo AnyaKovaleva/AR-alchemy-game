@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: Garlic
   m_EditorClassIdentifier: 
+  displayName: "\u0427\u0435\u0441\u043D\u043E\u043A"
   prefab: {fileID: 8616086569255239933, guid: 6142fec054332824ebee39493c736c2d, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: LutiMushroom
   m_EditorClassIdentifier: 
+  displayName: "\u041B\u044E\u0442\u044B\u0439 \u0433\u0440\u0438\u0431"
   prefab: {fileID: 8437192275465779817, guid: ee6414f4f36b9fc44babd8b4d7bd42ca, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

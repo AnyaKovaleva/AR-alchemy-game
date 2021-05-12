@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139143ee98d053345bff7902dfddd35b, type: 3}
   m_Name: Quicksilver
   m_EditorClassIdentifier: 
+  displayName: "\u0420\u0442\u0443\u0442\u044C"
   prefab: {fileID: 4379374833047843454, guid: 391fc99fbf3614d4f9bc571df4dc4510, type: 3}
-  price: 25
+  price: 30
   canBeAffectedByTemperature: 1

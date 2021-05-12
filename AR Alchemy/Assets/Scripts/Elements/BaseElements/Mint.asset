@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0861ab398e2e96346b2607f3fda33903, type: 3}
   m_Name: Mint
   m_EditorClassIdentifier: 
+  displayName: "\u041C\u044F\u0442\u0430"
   prefab: {fileID: 6588097558023954774, guid: 673d9e3ee0095ef47b05a73c2735fe2f, type: 3}
   price: 10
   canBeAffectedByTemperature: 1

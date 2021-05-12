@@ -52,6 +52,14 @@ public abstract class Card : MonoBehaviour
     }
 
 
+    //when card's temperature has changed it will return back to normal after 40 seconds
+    public IEnumerator ReturnToNormalTemperature()
+    {
+        yield return new WaitForSeconds(40f);
+        temperature = Temperature.NORMAL;
+        UpdateTemperatureVisual();
+    }
+
     public virtual ElementObject GetElement()
     {
         return element;
@@ -163,11 +171,11 @@ public abstract class Card : MonoBehaviour
     {
         if (other.tag == "IngredientSlot")
         {
-            if (prevSlot == other.gameObject)
-            {
-                return;
-            }
-            prevSlot = other.gameObject;
+            //if (prevSlot == other.gameObject)
+            //{
+            //    return;
+            //}
+            //prevSlot = other.gameObject;
             //Adding this ingredient to potion
             potionMakingScirpt.MixInNewIngredient(this, other.gameObject);
             canCollide = false;

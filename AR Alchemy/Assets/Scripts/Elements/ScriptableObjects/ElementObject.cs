@@ -13,6 +13,7 @@ public enum ElementType
 
 public abstract class ElementObject : ScriptableObject
 {
+    public string displayName;
     public GameObject prefab;
     [Range (1, 100)]
     public int price;
