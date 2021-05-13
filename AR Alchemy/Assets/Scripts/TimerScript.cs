@@ -21,8 +21,8 @@ public class TimerScript : MonoBehaviour
     void Start()
     {
         isCountdownRunning = false;
-        //default play time is 180 seconds
-        playtimeInSeconds = 180;
+        //default play time is 90 seconds
+        playtimeInSeconds = 90;
         timeLeft = playtimeInSeconds;
         timerText.color = Color.white;
     }
@@ -37,25 +37,20 @@ public class TimerScript : MonoBehaviour
         isCountdownRunning = false;
     }
 
-    //called when player changes value input field of the start panel
-    public void SetPlaytimeFromInputField(string seconds)
+    //sets playtime
+    public void SetPlaytime(int seconds)
     {
-        if (int.TryParse(seconds, out int intSeconds))
+
+        if (seconds > 0)
         {
-            if (intSeconds > 0)
-            {
-                playtimeInSeconds = intSeconds;
-            }
-            else
-            {
-                //if passed parameter is less than 0 then playtime is set to default 180 seconds
-                playtimeInSeconds = 180;
-            }
+            playtimeInSeconds = seconds;
         }
         else
         {
-            playtimeInSeconds = 180;
+            //if passed parameter is less than 0 then playtime is set to default 90 seconds
+            playtimeInSeconds = 90;
         }
+
         timeLeft = playtimeInSeconds;
     }
 
@@ -107,7 +102,7 @@ public class TimerScript : MonoBehaviour
 
     public void AddTime(int seconds)
     {
-        if(seconds < 0)
+        if (seconds < 0)
         {
             return;
         }

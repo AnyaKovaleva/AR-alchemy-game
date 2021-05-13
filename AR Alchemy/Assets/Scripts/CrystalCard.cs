@@ -47,7 +47,7 @@ public class CrystalCard : Card
                     StartCoroutine(card.ReturnToNormalTemperature());
                 }
                 card.UpdateTemperatureVisual();
-                
+
                 return;
             }
 
@@ -97,10 +97,6 @@ public class CrystalCard : Card
 
     private void OnCollisionStay(Collision collision)
     {
-        //if (!canCollide)
-        //{
-        //    return;
-        //}
         if (canCheckIfObjectIsTooClose)
         {
             Card otherCard = collision.gameObject.GetComponent<Card>(); //check if crystal is in collision with another card

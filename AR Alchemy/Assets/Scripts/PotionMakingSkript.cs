@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Text.RegularExpressions;
-
 
 
 //responsible for making potions. attached to transmutation circle
@@ -30,9 +28,7 @@ public class PotionMakingSkript : MonoBehaviour
     private RecipeObject potionRecipe;
     private int potionPrice;
     //ingredients that are placed on ingredient slots
-    private Card[] currentlyMixedIngredients;
-    //if true - potion has been spoiled
-                 //private bool isSpoiled;
+    private RecipeObject currentlyMixedIngredients;
     //number of elements in current recipe. number between 2 and maxNumberOfIngredients
     private int numOfIngredientsInPotion;
     //number of compound elements in recipe. Number from 0 to 2
@@ -49,6 +45,7 @@ public class PotionMakingSkript : MonoBehaviour
         SPOILED
     }
     private PotionState potionState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,8 +60,7 @@ public class PotionMakingSkript : MonoBehaviour
                 maxNumberOfIngredients = listOfElements.allElements.Count;
             }
             potionRecipe = new RecipeObject();
-            currentlyMixedIngredients = new Card[6];
-            //isSpoiled = false;
+            currentlyMixedIngredients = new RecipeObject();
             potionState = PotionState.NOT_READY;
             numOfIngredientsInPotion = 0;
             GeneratePotionRecipe();
@@ -154,8 +150,10 @@ public class PotionMakingSkript : MonoBehaviour
         //reset potion state, currently mixed ingredients, potionRecipe
         potionState = PotionState.NOT_READY;
         ChangePotionStatePrefab();
-                  //isSpoiled = false;
-        currentlyMixedIngredients = new Card[6];
+        currentlyMixedIngredients.ingredients.Clear();
+        currentlyMixedIngredients.temperatureOfIngredients.Clear();
+        currentlyMixedIngredients.ingredients.Capacity = 6;
+
         potionRecipe.ingredients.Clear();
         potionRecipe.temperatureOfIngredients.Clear();
     }
@@ -200,6 +198,12 @@ public class PotionMakingSkript : MonoBehaviour
         CalculatePotionPrice();
         UpdateIngredientSlotsText();
 
+
+        for (int i = 0; i < numOfIngredientsInPotion; i++)
+        {
+            Debug.Log(i + ") " + potionRecipe.ingredients[i].name + "  temp " + potionRecipe.temperatureOfIngredients[i]);
+        }
+
     }
 
     //updates text boxes under ingredient slots to display ingredient's names according to potionRecipe
@@ -226,7 +230,7 @@ public class PotionMakingSkript : MonoBehaviour
             }
             //displaying ingredient's name
             text.text = potionRecipe.ingredients[i].displayName;
-            if(potionRecipe.ingredients[i].GetElementType() == ElementType.COMPOUND_ELEMENT)
+            if (potionRecipe.ingredients[i].GetElementType() == ElementType.COMPOUND_ELEMENT)
             {
                 text.fontStyle = FontStyles.Underline;
             }
@@ -339,13 +343,12 @@ public class PotionMakingSkript : MonoBehaviour
             return;
         }
 
-        Debug.Log("Mixed in " + newIngredient.GetElement().name + "  temp " + newIngredient.GetTemperature());
-        if (currentlyMixedIngredients[slotIndex] != null)
+        if (currentlyMixedIngredients.ingredients.Count >= slotIndex + 1)
         {
             return;
         }
-        currentlyMixedIngredients[slotIndex] = newIngredient;
-        Debug.Log("list elem temp " + currentlyMixedIngredients[slotIndex].GetTemperature());
+        currentlyMixedIngredients.ingredients.Add(newIngredient.GetElement());
+        currentlyMixedIngredients.temperatureOfIngredients.Add(newIngredient.GetTemperature());
         //check if after adding new ingredient currentlyMixedIngredients follow the recipe
         CheckIfFollowsRecipe(slotIndex);
 
@@ -380,9 +383,9 @@ public class PotionMakingSkript : MonoBehaviour
     //checks if added ingredients match the recipe
     private void CheckIfFollowsRecipe(int lastAddedElementIndex)
     {
-        for (int i = 0; i < currentlyMixedIngredients.Length; i++)
+        for (int i = 0; i < currentlyMixedIngredients.ingredients.Count; i++)
         {
-            if (currentlyMixedIngredients[i] == null)
+            if (currentlyMixedIngredients.ingredients[i] == null)
             {
                 Debug.Log("ingredient slot is null " + i);
                 if (i < lastAddedElementIndex)
@@ -394,21 +397,21 @@ public class PotionMakingSkript : MonoBehaviour
                 continue;
             }
 
-            Debug.Log("index = " + i + " recipe elem = " + potionRecipe.ingredients[i] + "  current mixed = " + currentlyMixedIngredients[i].GetElement());
+            Debug.Log("index = " + i + " recipe elem = " + potionRecipe.ingredients[i] + "  current mixed = " + currentlyMixedIngredients.ingredients[i]);
 
-            if (currentlyMixedIngredients[i].GetElement() == potionRecipe.ingredients[i])
+            if (currentlyMixedIngredients.ingredients[i] == potionRecipe.ingredients[i])
             {
-                if (currentlyMixedIngredients[i].GetTemperature() != potionRecipe.temperatureOfIngredients[i])
+                if (currentlyMixedIngredients.temperatureOfIngredients[i] != potionRecipe.temperatureOfIngredients[i])
                 {
                     //element has incorrect temperature
-                    Debug.Log("Temp = " + potionRecipe.temperatureOfIngredients[i] + "   but it SHOULD be " + currentlyMixedIngredients[i].GetTemperature());
+                    Debug.Log("Temp = " + potionRecipe.temperatureOfIngredients[i] + "   but it SHOULD be " + currentlyMixedIngredients.temperatureOfIngredients[i]);
                     potionState = PotionState.SPOILED;
                     return;
                 }
             }
             else
             {
-                Debug.Log("element should be " + currentlyMixedIngredients[i].GetElement().name);
+                Debug.Log("element should be " + currentlyMixedIngredients.ingredients[i].name);
                 //element does not match recipe
                 potionState = PotionState.SPOILED;
                 return;
@@ -474,34 +477,39 @@ public class PotionMakingSkript : MonoBehaviour
     //adds extra playtime based on number of ingredients in potion. Called when potion is successfully crafted
     private void AddExtraPlaytime()
     {
-        if(timer == null)
+        if (timer == null)
         {
             return;
         }
 
         switch (numOfIngredientsInPotion)
         {
-            case 2: timer.AddTime(40);
+            case 2:
+                timer.AddTime(40);
                 Debug.Log("added extra 40 seconds");
                 break;
-            case 3: timer.AddTime(50);
+            case 3:
+                timer.AddTime(50);
                 Debug.Log("added extra 50 seconds");
 
                 break;
-            case 4: timer.AddTime(60);
+            case 4:
+                timer.AddTime(60);
                 Debug.Log("added extra 60 seconds");
 
                 break;
-            case 5: timer.AddTime(70);
+            case 5:
+                timer.AddTime(70);
                 break;
-            case 6: timer.AddTime(90);
+            case 6:
+                timer.AddTime(90);
                 break;
         }
 
-        if(numOfCompoundIngredientsInPotion != 0)
+        if (numOfCompoundIngredientsInPotion != 0)
         {
             timer.AddTime(20 * numOfCompoundIngredientsInPotion);
-            Debug.Log("added extra " + (2 * numOfCompoundIngredientsInPotion )+" seconds");
+            Debug.Log("added extra " + (2 * numOfCompoundIngredientsInPotion) + " seconds");
 
         }
 
@@ -514,13 +522,13 @@ public class PotionMakingSkript : MonoBehaviour
 
     public void SetRecipe(RecipeObject newRecipe)
     {
-        if(newRecipe != null)
+        if (newRecipe != null)
         {
             ResetParameters();
-            for(int i = 0; i < newRecipe.ingredients.Count; i++)
+            for (int i = 0; i < newRecipe.ingredients.Count; i++)
             {
                 potionRecipe.ingredients.Add(newRecipe.ingredients[i]);
-                if(i < newRecipe.temperatureOfIngredients.Count)
+                if (i < newRecipe.temperatureOfIngredients.Count)
                 {
                     potionRecipe.temperatureOfIngredients.Add(newRecipe.temperatureOfIngredients[i]);
                 }
@@ -531,7 +539,7 @@ public class PotionMakingSkript : MonoBehaviour
             }
             numOfIngredientsInPotion = potionRecipe.ingredients.Count;
             numOfCompoundIngredientsInPotion = potionRecipe.GetNumberOfCompoundElementsInRecipe();
-            if(numOfCompoundIngredientsInPotion > 2)
+            if (numOfCompoundIngredientsInPotion > 2)
             {
                 Debug.LogError("Potion recipe can contain maximum 2 compound elements");
                 GeneratePotionRecipe();

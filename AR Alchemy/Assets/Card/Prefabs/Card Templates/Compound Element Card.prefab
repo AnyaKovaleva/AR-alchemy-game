@@ -168,8 +168,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 9ad269c99dcf42b7aedefd83dd5a7b9d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 72eae90d2816b5e458495173839afc59, type: 2}
+  m_sharedMaterial: {fileID: -577278999340234952, guid: 72eae90d2816b5e458495173839afc59, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_fontSizeMin: 5
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -386,14 +386,14 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: ComplexElement
+  mTrackableName: CompoundElement
   mInitializedInEditor: 1
   mDataSetPath: 
-  mAspectRatio: 1
+  mAspectRatio: 1.4068916
   mImageTargetType: 3
-  mWidth: 0.20000002
+  mWidth: 0.14215738
   mHeight: 0.20000002
-  mRuntimeTexture: {fileID: 2800000, guid: 7f419e2344698df47872b073ea9c5807, type: 3}
+  mRuntimeTexture: {fileID: 2800000, guid: de0821874db7bf94d96329c75f7b2c98, type: 3}
 --- !u!114 &3985807788643334704
 MonoBehaviour:
   m_ObjectHideFlags: 0

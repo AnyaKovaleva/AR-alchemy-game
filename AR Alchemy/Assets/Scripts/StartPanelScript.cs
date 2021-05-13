@@ -10,6 +10,7 @@ public class StartPanelScript : MonoBehaviour
     public void Play()
     {
         gameObject.SetActive(false);
+        timer.SetPlaytime(90);
         timer.StartTimer();
     }
 }

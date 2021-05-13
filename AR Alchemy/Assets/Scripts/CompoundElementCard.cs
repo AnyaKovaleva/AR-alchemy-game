@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Text.RegularExpressions;
+
 
 public class CompoundElementCard : Card
 {
@@ -48,7 +48,8 @@ public class CompoundElementCard : Card
             if (index != -1)
             {
                 compoundElementPrefabsList[index].SetActive(true);
-                elementNameDisplay.text = Regex.Replace(currentCompoundElement.name, "([a-z])([A-Z])", "$1 $2").Trim(); //ObjectNames.NicifyVariableName(currentCompoundElement.name);
+                elementNameDisplay.text = currentCompoundElement.displayName;
+                UpdateTemperatureVisual();
                 return;
             }
         }
@@ -75,7 +76,9 @@ public class CompoundElementCard : Card
             if (index != -1)
             {//if compound element we just got from mixingScript had already been spawned on this card before we just find it in prefabs list and activate it and update element name display
                 compoundElementPrefabsList[index].SetActive(true);
-                elementNameDisplay.text = Regex.Replace(currentCompoundElement.name, "([a-z])([A-Z])", "$1 $2").Trim();
+                elementNameDisplay.text = currentCompoundElement.displayName;
+                canBeAffectedByTemperature = currentCompoundElement.canBeAffectedByTemperature;
+                temperature = Temperature.NORMAL;
                 return;
             }
             else
@@ -84,10 +87,13 @@ public class CompoundElementCard : Card
                 tmpCompElemPrefab = Instantiate(currentCompoundElement.prefab, this.transform, false);
                 tmpCompElemPrefab.name = currentCompoundElement.prefab.name;
                 compoundElementPrefabsList.Add(tmpCompElemPrefab);
-                elementNameDisplay.text = Regex.Replace(currentCompoundElement.name, "([a-z])([A-Z])", "$1 $2").Trim();
+                elementNameDisplay.text = currentCompoundElement.displayName;
+                canBeAffectedByTemperature = currentCompoundElement.canBeAffectedByTemperature;
+                temperature = Temperature.NORMAL;
+                UpdateTemperatureVisual();
+
             }
         }
-
     }
 
     //called when card image is not tracked. Disables current prefab showed on card

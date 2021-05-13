@@ -171,11 +171,6 @@ public abstract class Card : MonoBehaviour
     {
         if (other.tag == "IngredientSlot")
         {
-            //if (prevSlot == other.gameObject)
-            //{
-            //    return;
-            //}
-            //prevSlot = other.gameObject;
             //Adding this ingredient to potion
             potionMakingScirpt.MixInNewIngredient(this, other.gameObject);
             canCollide = false;
